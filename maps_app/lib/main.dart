@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:maps_app/pages/acceso_gps_page.dart';
+import 'package:maps_app/pages/loading_page.dart';
+import 'package:maps_app/pages/mapa_page.dart';
  
 void main() => runApp(MyApp());
  
@@ -7,17 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      title: 'Maps app',
+      home: LoadingPage(),
+      routes: {
+         "mapa":   (_) => MapaPage(),
+         "loading": (_) => LoadingPage(),
+         "acceso_gps": (_) => AccesoGpsPage(),
+      }
     );
   }
 }
