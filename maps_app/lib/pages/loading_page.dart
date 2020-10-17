@@ -24,8 +24,9 @@ class LoadingPage extends StatelessWidget {
   Future checkGPSLoaction(BuildContext context)async {
     //TODO: permiso gps 
     //TODO: gps activo 
-    Future.delayed(Duration(milliseconds: 100),()=>
-    Navigator.pushReplacement(context,navegarMapaFadeIn(context, AccesoGpsPage()) ));
+    Future.delayed(Duration(milliseconds: 100)/*,()=>
+    Navigator.pushReplacement(context,navegarMapaFadeIn(context, AccesoGpsPage()) )*/);
+    print ("holamundo");
     
     //Navigator.pushReplacement(context,navegarMapaFadeIn(context, MapaPage()) );
   
