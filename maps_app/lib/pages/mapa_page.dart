@@ -8,25 +8,39 @@ class MapaPage extends StatefulWidget {
 }
 
 class _MapaPageState extends State<MapaPage> {
-
   @override
   void initState() {
     context.bloc<MiUbicacionBloc>().iniciarSegimiento();
     super.initState();
   }
-  
+
   @override
   void dispose() {
-   context.bloc<MiUbicacionBloc>().cancelarSeguimiento();
+    context.bloc<MiUbicacionBloc>().cancelarSeguimiento();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("MapaPage"),
+      body: BlocBuilder<MiUbicacionBloc, MiUbicacionstate>(
+        builder: (context, state) {
+          return crearMapa(state);
+        },
       ),
     );
+  }
+
+  Widget crearMapa(MiUbicacionstate state){
+    if(state.existeUbicacion){
+            return Center(
+              child: Text("${state.ubicacion.latitude},${state.ubicacion.longitude}"),
+            );
+          } 
+          else{
+            return Center(
+            child: CircularProgressIndicator(),
+          );
+          }
   }
 }
