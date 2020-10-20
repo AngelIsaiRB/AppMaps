@@ -8,6 +8,8 @@ class AccesoGpsPage extends StatefulWidget {
 
 class _AccesoGpsPageState extends State<AccesoGpsPage> with WidgetsBindingObserver { // estar pendiente de los cambios on resume pause inactive
 
+  bool popup = false;
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this); // para observar el estado de la app
@@ -23,7 +25,7 @@ class _AccesoGpsPageState extends State<AccesoGpsPage> with WidgetsBindingObserv
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async{
     //observar estado de la app remuse,pause inactive
-    if (state == AppLifecycleState.resumed){
+    if (state == AppLifecycleState.resumed && !popup){
       if( await Permission.location.isGranted){
         Navigator.pushReplacementNamed(context, "loading");
       }
@@ -46,8 +48,11 @@ class _AccesoGpsPageState extends State<AccesoGpsPage> with WidgetsBindingObserv
               shape: StadiumBorder(),
               elevation: 0,
               onPressed: ()async {
+                popup=true;
                 final status = await Permission.location.request(); // permision handler
-                this.accesoGPs (status);
+                // ignore: await_only_futures
+                await this.accesoGPs (status);
+                popup=false;
               },
 
             ),
@@ -57,12 +62,12 @@ class _AccesoGpsPageState extends State<AccesoGpsPage> with WidgetsBindingObserv
     );
   }
 
-  void accesoGPs(PermissionStatus status){ // permision handler
+  void accesoGPs(PermissionStatus status) async { // permision handler
     switch(status){
 
       
       case PermissionStatus.granted:
-        Navigator.pushReplacementNamed(context, "mapa");
+        await Navigator.pushReplacementNamed(context, "loading");
         break;
       case PermissionStatus.undetermined:
       case PermissionStatus.denied:        
