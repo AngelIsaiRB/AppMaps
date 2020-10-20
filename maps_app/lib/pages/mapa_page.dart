@@ -36,6 +36,7 @@ class _MapaPageState extends State<MapaPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           BtnUbicacion(),
+          BtnSeguirUbicacion(),
           BtnMiRuta()
         ],
       ),
@@ -49,7 +50,7 @@ class _MapaPageState extends State<MapaPage> {
         mapaBloc.add(OnNuevaUambio(state.ubicacion));
         final camaraPosition = new CameraPosition(
         target: state.ubicacion,
-        zoom: 15
+        zoom: 16
         );
             return GoogleMap(
               initialCameraPosition: camaraPosition,              
