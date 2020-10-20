@@ -35,17 +35,18 @@ class _MapaPageState extends State<MapaPage> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          BtnUbicacion()
+          BtnUbicacion(),
+          BtnMiRuta()
         ],
       ),
     );
   }
 
   Widget crearMapa(MiUbicacionstate state){    
-    if(state.existeUbicacion){
-        
+    if(state.existeUbicacion){        
         // ignore: close_sinks
         final mapaBloc = BlocProvider.of<MapaBloc>(context);
+        mapaBloc.add(OnNuevaUambio(state.ubicacion));
         final camaraPosition = new CameraPosition(
         target: state.ubicacion,
         zoom: 15
@@ -61,6 +62,7 @@ class _MapaPageState extends State<MapaPage> {
                 mapaBloc.initMapa(controller);
               },
                */
+              polylines: mapaBloc.state.polylines.values.toSet(),
             );
           } 
           else{
