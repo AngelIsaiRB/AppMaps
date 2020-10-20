@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:maps_app/bloc/mapa/mapa_bloc.dart';
 import 'package:maps_app/bloc/mi_ubicacion/mi_ubicacion_bloc.dart';
+import 'package:maps_app/widgets/widgets.dart';
 
 class MapaPage extends StatefulWidget {
   @override
@@ -30,6 +31,12 @@ class _MapaPageState extends State<MapaPage> {
         builder: (context, state) {
           return crearMapa(state);
         },
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          BtnUbicacion()
+        ],
       ),
     );
   }

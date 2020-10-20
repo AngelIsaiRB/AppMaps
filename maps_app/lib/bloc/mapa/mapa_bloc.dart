@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import 'package:maps_app/themes/uber_map_them.dart';
@@ -21,6 +21,12 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
 
       add(OnMapaListo());
     }
+  }
+  void moverCamara(LatLng destino){
+
+    final camaraUpdate = CameraUpdate.newLatLng(destino);
+    this._mapcontroller?.animateCamera(camaraUpdate);
+
   }
 
   @override
