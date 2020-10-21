@@ -64,6 +64,9 @@ class _MapaPageState extends State<MapaPage> {
               },
                */
               polylines: mapaBloc.state.polylines.values.toSet(),
+              onCameraMove: (cameraPosition){
+                mapaBloc.add(OnMoviomapa(cameraPosition.target));
+              },
             );
           } 
           else{
