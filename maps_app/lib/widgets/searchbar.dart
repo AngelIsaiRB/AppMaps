@@ -11,7 +11,10 @@ class SerchBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 30),
         width: width,                
         child: GestureDetector(
-          onTap: (){print("busvando.-....");},
+          onTap: (){
+            print("busvando.-....");
+            showSearch(context: context, delegate: SearchDestination());
+            },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20,  vertical: 13),
             width: double.infinity,          
