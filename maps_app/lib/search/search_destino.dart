@@ -47,7 +47,6 @@ class SearchDestination extends SearchDelegate<SearchResult>{
            title: Text("Colocar manualmente"),
            onTap: (){
              
-             print("Manualmente");
              this.close(context, SearchResult(cancelo: false,manual: true));
            },
          )

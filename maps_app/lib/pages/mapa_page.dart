@@ -34,10 +34,12 @@ class _MapaPageState extends State<MapaPage> {
               return crearMapa(state);
             },
           ),
-          Positioned(
-            child: SerchBar(),
-            top: 15,
-            ),
+          //TODO:hacr el todo manual
+         // Positioned(
+         //   child: SerchBar(),
+         //   top: 15,
+         //   ),
+         MarcadorManual(),
         ],
       ),
       floatingActionButton: Column(
