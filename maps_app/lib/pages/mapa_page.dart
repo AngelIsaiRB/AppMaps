@@ -34,11 +34,11 @@ class _MapaPageState extends State<MapaPage> {
               return crearMapa(state);
             },
           ),
-          //TODO:hacr el todo manual
-         // Positioned(
-         //   child: SerchBar(),
-         //   top: 15,
-         //   ),
+          
+          Positioned(
+            child: SerchBar(),
+            top: 15,
+            ),
          MarcadorManual(),
         ],
       ),
