@@ -10,7 +10,10 @@ class SerchBar extends StatelessWidget {
           return Container();
         }
         else{
-          return buildSerchbar(context);
+          return FadeInDown(
+            duration: Duration(milliseconds: 300),
+            child: buildSerchbar(context)
+            );
         }
       },
     );

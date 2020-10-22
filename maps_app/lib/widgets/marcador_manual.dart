@@ -31,14 +31,16 @@ class _BuildMarcadorManual extends StatelessWidget {
         Positioned(
           top: 70,
           left: 20,
-          child: CircleAvatar(
-            maxRadius: 25,
-            backgroundColor: Colors.white,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black87,),
-              onPressed: (){
-                context.bloc<BusquedaBloc>().add(OnDescativarMarcadorManual());
-              },
+          child: FadeInLeft(
+            child: CircleAvatar(
+              maxRadius: 25,
+              backgroundColor: Colors.white,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black87,),
+                onPressed: (){
+                  context.bloc<BusquedaBloc>().add(OnDescativarMarcadorManual());
+                },
+              ),
             ),
           ),
         ),
@@ -46,23 +48,27 @@ class _BuildMarcadorManual extends StatelessWidget {
         Center(
           child: Transform.translate(
             offset: Offset(0,-15),
-            child: Icon(Icons.location_on,size: 50,color: Colors.red)
+            child: BounceInDown(
+              from: 200,
+              child: Icon(Icons.location_on,size: 50,color: Colors.black))
             ),
         ),
         //boton de confirmar 
         Positioned(
           bottom: 70,
           left: 40,
-          child: MaterialButton(
-            child: Text("Confirmar destino",style: TextStyle(color: Colors.white),),
-            color: Colors.black,
-            shape: StadiumBorder(),
-            elevation: 0,
-            splashColor: Colors.transparent,
-            minWidth: width-120,
-            onPressed: (){
-              
-            },
+          child: FadeIn(
+            child: MaterialButton(
+              child: Text("Confirmar destino",style: TextStyle(color: Colors.white),),
+              color: Colors.black,
+              shape: StadiumBorder(),
+              elevation: 0,
+              splashColor: Colors.transparent,
+              minWidth: width-120,
+              onPressed: (){
+                
+              },
+            ),
           ),
         )
       ],
