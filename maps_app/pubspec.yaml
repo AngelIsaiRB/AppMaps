@@ -34,6 +34,7 @@ dependencies:
   flutter_bloc: ^6.0.6
   permission_handler: ^5.0.1+1
   geolocator: ^6.0.0+4
+  polyline:
 
 dev_dependencies:
   flutter_test:
