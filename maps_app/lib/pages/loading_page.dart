@@ -37,8 +37,6 @@ class _LoadingPageState extends State<LoadingPage>  with WidgetsBindingObserver{
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
