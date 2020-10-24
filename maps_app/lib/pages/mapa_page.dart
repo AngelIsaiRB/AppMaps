@@ -62,6 +62,9 @@ class _MapaPageState extends State<MapaPage> {
         target: state.ubicacion,
         zoom: 16
         );
+
+        return BlocBuilder<MapaBloc, MapaState>(
+          builder: (context, state) {
             return GoogleMap(
               initialCameraPosition: camaraPosition,              
               myLocationEnabled: true,
@@ -78,6 +81,9 @@ class _MapaPageState extends State<MapaPage> {
                 mapaBloc.add(OnMoviomapa(cameraPosition.target));
               },
             );
+          },
+        );
+            
           } 
           else{
             return Center(

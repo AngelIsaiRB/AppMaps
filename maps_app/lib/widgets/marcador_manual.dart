@@ -76,16 +76,22 @@ class _BuildMarcadorManual extends StatelessWidget {
   }
 
   void calcularDestino(BuildContext context)async {
+    
+    // ignore: close_sinks
+    final mapaBloc = context.bloc<MapaBloc>();
     final traficService = new TraficService();
     final inicio =  context.bloc<MiUbicacionBloc>().state.ubicacion;
-    final destino = context.bloc<MapaBloc>().state.ubicacionCentral;
+    final destino = mapaBloc.state.ubicacionCentral;
     final trafficResponse = await traficService.getCoordsInicioYFin(inicio, destino);
 
     final geometri = trafficResponse.routes[0].geometry;
     final duration = trafficResponse.routes[0].duration;
     final distancia = trafficResponse.routes[0].distance;
     // decodificar los puntos del geometry
-    final points = Poly.Polyline.Decode(encodedString: geometri, precision: 6);
-    final temp=points;
+    final points = Poly.Polyline.Decode(encodedString: geometri, precision: 6).decodedCoords;
+    final List<LatLng> coordList = points.map((point) => LatLng(point[0],point[1]) ).toList();
+    
+    mapaBloc.add(OnCrearRutaIniciodestino(coordList, distancia, duration));
+    
   }
 }

@@ -19,12 +19,8 @@ class TraficService{
 
 
   Future<DrivingResponse> getCoordsInicioYFin(LatLng inicio, LatLng destino)async {
-
-    print(inicio);
-    print(destino);
-
     final coordString= "${inicio.longitude},${inicio.latitude};${destino.longitude},${destino.latitude}";
-    final url="${this.baseUrl}/mapbox/driving/${coordString}";
+    final url="${this.baseUrl}/mapbox/driving/$coordString";
     final respuesta = await this._dio.get(url,queryParameters:{
       "alternatives":"true",
       "geometries":"polyline6",
