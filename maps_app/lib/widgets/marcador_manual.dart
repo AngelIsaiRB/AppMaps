@@ -95,6 +95,11 @@ class _BuildMarcadorManual extends StatelessWidget {
     mapaBloc.add(OnCrearRutaIniciodestino(coordList, distancia, duration));
     
     Navigator.of(context).pop();
-
+    //
+    // ignore: close_sinks
+    final busquedaBloc= context.bloc<BusquedaBloc>();
+    busquedaBloc.add(OnDescativarMarcadorManual());
+    final destno = context.bloc<MiUbicacionBloc>().state.ubicacion;
+    mapaBloc.moverCamara(destno);
   }
 }
