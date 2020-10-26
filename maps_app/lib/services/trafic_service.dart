@@ -1,6 +1,9 @@
 
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_app/helpers/debouncer.dart';
 import 'package:maps_app/models/search_response.dart';
 import 'package:maps_app/models/trafic_response.dart';
 
@@ -15,6 +18,11 @@ class TraficService{
   }
 
   final _dio= new Dio();
+  final debouncer = Debouncer<String>(duration: Duration(milliseconds: 500 ));
+  final StreamController<SerachResponse> _sugerencriasStreamController =  new StreamController<SerachResponse>.broadcast();
+  Stream<SerachResponse> get sugerenciasStream => this._sugerencriasStreamController.stream;
+
+
   final String baseUrlDir = "https://api.mapbox.com/directions/v5";
   final String baseUrlGeo = "https://api.mapbox.com/geocoding/v5";
   final String _apiKey = "pk.eyJ1IjoiYW5nZWxpc2FpIiwiYSI6ImNrZ2luaTFiZDA1NmIydnFvODg3OGV6ZzIifQ.rlbIF_aWQLlSF0DMn88D6A";
@@ -52,11 +60,23 @@ class TraficService{
     } catch (e) {
       return SerachResponse(features: []);
     }
-
-    
-
-
   }
+  
 
+void getSugerenciasPorQuery( String busqueda, LatLng proximidad ) {
+
+  debouncer.value = '';
+  debouncer.onValue = ( value ) async {
+    final resultados = await this.getResultadosPorQuery(value, proximidad);
+    this._sugerencriasStreamController.add(resultados);
+  };
+
+  final timer = Timer.periodic(Duration(milliseconds: 200), (_) {
+    debouncer.value = busqueda;
+  });
+
+  Future.delayed(Duration(milliseconds: 201)).then((_) => timer.cancel()); 
+
+}
 
 }

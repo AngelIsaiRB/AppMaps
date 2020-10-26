@@ -72,8 +72,9 @@ class SearchDestination extends SearchDelegate<SearchResult>{
     if(this.query.length==0){
       return Container();
     }
-    return  FutureBuilder(
-      future: this._traficService.getResultadosPorQuery(this.query.trim(),this.proximidad),      
+    this._traficService.getSugerenciasPorQuery(this.query.trim(), this.proximidad);
+    return  StreamBuilder(
+      stream: this._traficService.sugerenciasStream,      
       builder: (BuildContext context, AsyncSnapshot<SerachResponse> snapshot) {
         if(!snapshot.hasData){
           return Center(child: CircularProgressIndicator());
