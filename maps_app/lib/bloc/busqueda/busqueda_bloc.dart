@@ -2,6 +2,7 @@ import 'dart:async';
 
 
 import 'package:bloc/bloc.dart';
+import 'package:maps_app/models/search_results.dart';
 import 'package:meta/meta.dart';
 
 part 'busqueda_event.dart';
@@ -17,6 +18,13 @@ class BusquedaBloc extends Bloc<BusquedaEvent, BusquedaState> {
     }
     else if (event is OnDescativarMarcadorManual){
       yield state.copyWith(seleccionManual: false);
+    }
+    else if (event is OnAgregarHistorial){
+      final existe =state.historial.where((element) => element.nombreDestino==event.result.nombreDestino).length;
+      if(existe==0){
+      final newHistorial = [...state.historial, event.result];
+      yield state.copyWith(historial: newHistorial);
+      }
     }
 
   }
