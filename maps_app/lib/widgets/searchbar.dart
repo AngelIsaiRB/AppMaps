@@ -89,7 +89,8 @@ class SerchBar extends StatelessWidget {
      final List<LatLng> rutaCoordenadas = points.decodedCoords.map(
        (e) => LatLng(e[0],e[1])
        ).toList();
-    mapabloc.add(OnCrearRutaIniciodestino(rutaCoordenadas, distance, duration));
+      
+     mapabloc.add(OnCrearRutaIniciodestino(rutaCoordenadas, distance, duration, result.nombreDestino));
     Navigator.of(context).pop();
     //agregar al historial 
     // ignore: close_sinks

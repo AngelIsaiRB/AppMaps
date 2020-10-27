@@ -120,23 +120,29 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
     markerId: MarkerId("inicio"),
     position: event.rutaCoordenadas[0],
     infoWindow: InfoWindow(
-      title: "este es el nombre",
-      snippet: "este es el punto inicial",
-      anchor: Offset(0.5,0),
-      onTap: (){
-        print("este es el infowindows tab");
-      }
+      title: "Mi ubicacion",
+      snippet: "Duracion de recorrido ${(event.duracion/60).floor()} minutos",
+      
     )
 
   );
   final markerFin= new Marker(
     markerId: MarkerId("fin"),
-    position: event.rutaCoordenadas[event.rutaCoordenadas.length-1]    
+    position: event.rutaCoordenadas[event.rutaCoordenadas.length-1]  ,
+    infoWindow: InfoWindow(
+      title: "${event.nombreDestino}",
+      snippet: "Destino a ${(event.distancia/1000).floor()} Km",
+    )  
   );
 
   final newMarkees = {...state.markers};
   newMarkees["inicio"]= markerinicio;
   newMarkees["fin"] = markerFin;
+
+  Future.delayed(Duration(milliseconds: 200)).then(
+    (value){      
+      _mapcontroller.showMarkerInfoWindow(MarkerId("fin"));
+    });
 
   yield state.copyWith(
     polylines: currentPolylines, 
