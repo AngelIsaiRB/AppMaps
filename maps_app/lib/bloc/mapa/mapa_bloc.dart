@@ -118,7 +118,16 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
   
   final markerinicio = new Marker(
     markerId: MarkerId("inicio"),
-    position: event.rutaCoordenadas[0]
+    position: event.rutaCoordenadas[0],
+    infoWindow: InfoWindow(
+      title: "este es el nombre",
+      snippet: "este es el punto inicial",
+      anchor: Offset(0.5,0),
+      onTap: (){
+        print("este es el infowindows tab");
+      }
+    )
+
   );
   final markerFin= new Marker(
     markerId: MarkerId("fin"),
