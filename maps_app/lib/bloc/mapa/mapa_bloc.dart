@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:bloc/bloc.dart';
+import 'package:maps_app/helpers/helpers.dart';
 import 'package:meta/meta.dart';
 
 import 'package:maps_app/themes/uber_map_them.dart';
@@ -114,10 +115,15 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
   final currentPolylines = state.polylines;
   currentPolylines["mi_ruta_destino"]=this._miRutaDestino;
 
+  //icono inicio 
+  final icon =await  getAssetImageMarker();
+  final iconDestino =await  getNetworkInmageMarker();
+
   // marcadores
   
   final markerinicio = new Marker(
     markerId: MarkerId("inicio"),
+    icon: icon,
     position: event.rutaCoordenadas[0],
     infoWindow: InfoWindow(
       title: "Mi ubicacion",
@@ -128,13 +134,14 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
   );
   final markerFin= new Marker(
     markerId: MarkerId("fin"),
-    position: event.rutaCoordenadas[event.rutaCoordenadas.length-1]  ,
+    position: event.rutaCoordenadas[event.rutaCoordenadas.length-1],
+    icon: iconDestino,
     infoWindow: InfoWindow(
       title: "${event.nombreDestino}",
       snippet: "Destino a ${(event.distancia/1000).floor()} Km",
     )  
   );
-
+  
   final newMarkees = {...state.markers};
   newMarkees["inicio"]= markerinicio;
   newMarkees["fin"] = markerFin;
