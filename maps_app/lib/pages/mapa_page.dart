@@ -77,6 +77,8 @@ class _MapaPageState extends State<MapaPage> {
               },
                */
               polylines: mapaBloc.state.polylines.values.toSet(),
+              markers  : mapaBloc.state.markers.values.toSet(), //aqui se dibujan los markers 
+              
               onCameraMove: (cameraPosition){
                 mapaBloc.add(OnMoviomapa(cameraPosition.target));
               },

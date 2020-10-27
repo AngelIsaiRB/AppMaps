@@ -114,9 +114,24 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
   final currentPolylines = state.polylines;
   currentPolylines["mi_ruta_destino"]=this._miRutaDestino;
 
+  // marcadores
+  
+  final markerinicio = new Marker(
+    markerId: MarkerId("inicio"),
+    position: event.rutaCoordenadas[0]
+  );
+  final markerFin= new Marker(
+    markerId: MarkerId("fin"),
+    position: event.rutaCoordenadas[event.rutaCoordenadas.length-1]    
+  );
+
+  final newMarkees = {...state.markers};
+  newMarkees["inicio"]= markerinicio;
+  newMarkees["fin"] = markerFin;
+
   yield state.copyWith(
     polylines: currentPolylines, 
-    //
+    markers: newMarkees,
   );
 
 }
