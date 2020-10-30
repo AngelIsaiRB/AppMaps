@@ -1,7 +1,5 @@
 
-
-
-import 'package:flutter/material.dart';
+part of 'custom_markers.dart';
 
 class MarkerInicioPainter extends CustomPainter {
   final int minutos;

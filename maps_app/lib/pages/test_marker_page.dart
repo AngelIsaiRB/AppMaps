@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maps_app/custom_markers/marker_destino.dart';
-import 'package:maps_app/custom_markers/marker_inicio.dart';
+import 'package:maps_app/custom_markers/custom_markers.dart';
+
 
 class TestMarkerPage extends StatelessWidget {
   @override
@@ -10,7 +10,7 @@ class TestMarkerPage extends StatelessWidget {
         child: Container(
           width: 350,
           height: 150,
-          color: Colors.red,
+          
           child: CustomPaint(
             // painter: MarkerInicioPainter(50),
             painter: MarkerDestinoPainter("este es la descrsdadadqwwe  essdfs dfsipciondsksd,asdasd", 2500),

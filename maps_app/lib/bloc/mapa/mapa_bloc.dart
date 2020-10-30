@@ -116,12 +116,21 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
   currentPolylines["mi_ruta_destino"]=this._miRutaDestino;
 
   //icono inicio 
-  final icon =await  getAssetImageMarker();
-  final iconDestino =await  getNetworkInmageMarker();
+
+  /*obtener imagen desde asset*/ 
+  // final icon =await  getAssetImageMarker();
+
+  // desde widget a imagen 
+  final icon =await  getMarkerInicioIcon(event.duracion.toInt());
+  final iconDestino = await getMarkerDestinoIcon(event.distancia, event.nombreDestino);
+
+  /* obtener imagen desde internet network */
+  // final iconDestino =await  getNetworkInmageMarker();
 
   // marcadores
   
   final markerinicio = new Marker(
+    anchor: Offset(0.0, 1.0),
     markerId: MarkerId("inicio"),
     icon: icon,
     position: event.rutaCoordenadas[0],
@@ -133,6 +142,7 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
 
   );
   final markerFin= new Marker(
+    anchor: Offset(0.0, 1.0),
     markerId: MarkerId("fin"),
     position: event.rutaCoordenadas[event.rutaCoordenadas.length-1],
     icon: iconDestino,
@@ -148,7 +158,7 @@ Stream<MapaState> _onCrearRutaInicioDestino(OnCrearRutaIniciodestino event )asyn
 
   Future.delayed(Duration(milliseconds: 200)).then(
     (value){      
-      _mapcontroller.showMarkerInfoWindow(MarkerId("fin"));
+    //  _mapcontroller.showMarkerInfoWindow(MarkerId("fin")); 
     });
 
   yield state.copyWith(
