@@ -8,6 +8,7 @@ import 'package:maps_app/pages/acceso_gps_page.dart';
 import 'package:maps_app/pages/loading_page.dart';
 import 'package:maps_app/pages/mapa_page.dart';
 
+//
  
 void main() => runApp(MyApp());
  
