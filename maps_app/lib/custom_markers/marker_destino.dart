@@ -1,16 +1,15 @@
-
-
-
 import 'package:flutter/material.dart';
 
-class MarkerInicioPainter extends CustomPainter {
-  final int minutos;
+class MarkerDestinoPainter extends CustomPainter {
 
-  MarkerInicioPainter(this.minutos);
+  final String descripcion;
+  final double metros;
+
+  MarkerDestinoPainter(this.descripcion, this.metros);
 
   @override
   void paint(Canvas canvas, Size size) {
-    
+       
     final double circuloNegroR=20;
     final double circuloBlancoR=10;
 
@@ -31,10 +30,10 @@ class MarkerInicioPainter extends CustomPainter {
       // sombra
       final Path path = new Path();
 
-      path.moveTo(40 ,20 );
+      path.moveTo(0 ,20 );
       path.lineTo(size.width-10, 20);
       path.lineTo(size.width-10, 100);
-      path.lineTo(40, 100);
+      path.lineTo(0, 100);
       canvas.drawShadow(
         path, 
         Colors.black87, 
@@ -43,62 +42,68 @@ class MarkerInicioPainter extends CustomPainter {
         );
         // cajs
 
-      final cajaBlanca= Rect.fromLTWH(40, 20, size.width-55, 80);
+      final cajaBlanca= Rect.fromLTWH(0, 20, size.width-10, 80);
       canvas.drawRect(cajaBlanca, paint);
       paint.color=Colors.black;
-      final cajaNegra= Rect.fromLTWH(40, 20, 70, 80);
+      final cajaNegra= Rect.fromLTWH(0, 20, 70, 80);
       canvas.drawRect(cajaNegra, paint);
 
       // dibujar textos
-
+      double kilometros = this.metros/1000;
+      kilometros= ((kilometros*100).floor().toDouble())/100;  
       TextSpan textSpan = new TextSpan(
-        style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w400),
-        text: "$minutos"
+        style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w400),
+        text: "$kilometros"
       );
        TextPainter textPainter =  new TextPainter(
         text: textSpan,
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center
       )..layout(
-        minWidth: 70,
-        maxWidth: 70
+        minWidth: 80,
+        maxWidth: 80
       );
 
-      textPainter.paint(canvas, Offset(40, 35));
+      textPainter.paint(canvas, Offset(0, 35));
 
        textSpan = new TextSpan(
         style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
-        text: "Min"
-      );
-       textPainter =  new TextPainter(
-        text: textSpan,
-        textDirection: TextDirection.ltr,
-        textAlign: TextAlign.center
-      )..layout(
-        minWidth: 70,
-        maxWidth: 70
-      );
-      textPainter.paint(canvas, Offset(40, 67));
-      //  mi ubicacion 
-       textSpan = new TextSpan(
-        style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w400),
-        text: "Mi ubicacion"
+        text: "KM"
       );
        textPainter =  new TextPainter(
         text: textSpan,
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center
       )..layout(        
-        maxWidth: size.width-130
+        maxWidth: 70
       );
-      textPainter.paint(canvas, Offset(120, 50));
+      textPainter.paint(canvas, Offset(20, 67));
+      //  mi ubicacion 
+       textSpan = new TextSpan(
+        style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w400),
+        text: this.descripcion
+      );
+       textPainter =  new TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        ellipsis:"..."
+      )..layout(        
+        maxWidth: size.width-100
+      );
+      textPainter.paint(canvas, Offset(90, 35));
+
+  
 
 
+
+    }
+  
+    @override
+    bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    throw UnimplementedError();
   }
-
-  @override
-  bool shouldRepaint(MarkerInicioPainter oldDelegate) => true;
-
-  @override
-  bool shouldRebuildSemantics(MarkerInicioPainter oldDelegate) => false;
+  
 }
